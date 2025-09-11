@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ficha de Mago: A Ascensão</title>
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+</head>
+<body>
+    <main class="character-sheet">
+        <header class="sheet-header">
+            <h1>Ficha de Mago: A Ascensão</h1>
+            <button id="generate-pdf-btn" class="button">Gerar PDF</button>
+            <div class="character-info">
+                <div class="info-row">
+                    <label for="char-name">Nome:</label>
+                    <input type="text" id="char-name" name="char-name">
+                </div>
+                <div class="info-row">
+                    <label for="player">Jogador:</label>
+                    <input type="text" id="player" name="player">
+                </div>
+                <div class="info-row">
+                    <label for="chronicle">Crônica:</label>
+                    <input type="text" id="chronicle" name="chronicle">
+                </div>
+                <div class="info-row">
+                    <label for="nature">Natureza:</label>
+                    <input type="text" id="nature" name="nature">
+                </div>
+                <div class="info-row">
+                    <label for="demeanor">Comportamento:</label>
+                    <input type="text" id="demeanor" name="demeanor">
+                </div>
+                <div class="info-row">
+                    <label for="essence">Essência:</label>
+                    <input type="text" id="essence" name="essence">
+                </div>
+                <div class="info-row">
+                    <label for="affiliation">Afiliação:</label>
+                    <input type="text" id="affiliation" name="affiliation">
+                </div>
+                <div class="info-row">
+                    <label for="faction">Facção:</label>
+                    <input type="text" id="faction" name="faction">
+                </div>
+                <div class="info-row">
+                    <label for="concept">Conceito:</label>
+                    <input type="text" id="concept" name="concept">
+                </div>
+            </div>
+        </header>
+
+        <section>
+            <h2>Atributos</h2>
+            <div class="attributes">
+                <div class="attribute-group">
+                    <h3>Físicos</h3>
+                    <div id="physical-attributes"><!-- Gerado por JS --></div>
+                </div>
+                <div class="attribute-group">
+                    <h3>Sociais</h3>
+                    <div id="social-attributes"><!-- Gerado por JS --></div>
+                </div>
+                <div class="attribute-group">
+                    <h3>Mentais</h3>
+                    <div id="mental-attributes"><!-- Gerado por JS --></div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Habilidades</h2>
+            <div class="abilities">
+                <div class="ability-group">
+                    <div class="advantage-title-container">
+                        <h3>Talentos</h3>
+                        <button class="add-trait-btn" data-target="talents" data-category="abilities" data-group="talents">+</button>
+                    </div>
+                    <div id="talents"><!-- Gerado por JS --></div>
+                </div>
+                <div class="ability-group">
+                    <div class="advantage-title-container">
+                        <h3>Perícias</h3>
+                        <button class="add-trait-btn" data-target="skills" data-category="abilities" data-group="skills">+</button>
+                    </div>
+                    <div id="skills"><!-- Gerado por JS --></div>
+                </div>
+                <div class="ability-group">
+                    <div class="advantage-title-container">
+                        <h3>Conhecimentos</h3>
+                        <button class="add-trait-btn" data-target="knowledges" data-category="abilities" data-group="knowledges">+</button>
+                    </div>
+                    <div id="knowledges"><!-- Gerado por JS --></div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Esferas</h2>
+            <div id="spheres" class="spheres-grid">
+                <!-- Gerado por JS -->
+            </div>
+        </section>
+
+        <section>
+            <h2>Vantagens</h2>
+            <div class="advantages-grid">
+                <div class="advantage-group">
+                    <div class="advantage-title-container">
+                        <h3>Antecedentes</h3>
+                        <button class="add-trait-btn" data-target="backgrounds" data-category="advantages" data-group="backgrounds">+</button>
+                    </div>
+                    <div id="backgrounds"><!-- Gerado por JS --></div>
+                    <div class="advantage-title-container">
+                        <h3 class="other-traits-title">Outras Características</h3>
+                        <button class="add-trait-btn" data-target="other-traits" data-category="advantages" data-group="other-traits">+</button>
+                    </div>
+                    <div id="other-traits"><!-- Gerado por JS --></div>
+                </div>
+
+                <div class="advantage-column">
+                    <div class="advantage-group">
+                        <h3 class="centered-title">Arete</h3>
+                        <div id="arete"><!-- Gerado por JS --></div>
+                    </div>
+                    <div class="advantage-group">
+                        <h3 class="centered-title">Força de Vontade</h3>
+                        <div id="willpower"><!-- Gerado por JS --></div>
+                        <div id="willpower-temporary"></div>
+                    </div>
+                    <div class="advantage-group">
+                        <h3 class="centered-title">Quintessência</h3>
+                        <div id="quintessence"><!-- Gerado por JS --></div>
+                        <p class="paradox-label">Paradoxo</p>
+                    </div>
+                </div>
+
+                <div class="advantage-group">
+                    <h3>Vitalidade</h3>
+                    <div id="health"><!-- Gerado por JS --></div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    <script src="assets/js/components/attributeBlock.js"></script>
+    <script src="assets/js/core/characterSheet.js"></script>
+    <script src="assets/js/core/validation.js"></script>
+    <script src="assets/js/core/calculations.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="assets/js/pdfGenerator.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
