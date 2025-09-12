@@ -13,27 +13,32 @@ services:
     ports:
       - "5432:5432"
 
-  # Serviço para o banco de dados MongoDB
-  mongodb:
-    image: mongo:latest
-    container_name: rpg-mongodb
-    #restart: always
-    volumes:
-      - ./data/mongodb:/data/db
-    ports:
-      - "27017:27017"
+  # O serviço MongoDB não parece ser usado pelo backend principal (loco).
+  # Se você não o estiver usando para outros fins, pode removê-lo.
+  # mongodb:
+  #   image: mongo:latest
+  #   container_name: rpg-mongodb
+  #   #restart: always
+  #   volumes:
+  #     - ./data/mongodb:/data/db
+  #   ports:
+  #     - "27017:27017"
 
-  # Serviço para o seu backend em Rust
+  # Serviço para o backend em Rust (baseado no framework Loco)
   backend:
     build:
-      context: . 
-      dockerfile: .\backend\Dockerfile
-    container_name: rpg-backend
+      context: ./backend-loco/ancient
+      dockerfile: Dockerfile
+    container_name: rpg-backend-loco
     #restart: always
     depends_on:
       - db
-      - mongodb
     ports:
-      - "8000:8000"
-    volumes:
-      - .:/app
+      - "5150:5150"
+    env_file:
+      - .env
+    environment:
+      - DATABASE_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
+      # A porta e o binding são configurados no Dockerfile para produção.
+      # - LOCO_SERVER_PORT=5150
+      # - LOCO_SERVER_BINDING="0.0.0.0"
