@@ -13,19 +13,8 @@ services:
     ports:
       - "5432:5432"
 
-  # O serviço MongoDB não parece ser usado pelo backend principal (loco).
-  # Se você não o estiver usando para outros fins, pode removê-lo.
-  # mongodb:
-  #   image: mongo:latest
-  #   container_name: rpg-mongodb
-  #   #restart: always
-  #   volumes:
-  #     - ./data/mongodb:/data/db
-  #   ports:
-  #     - "27017:27017"
-
   # Serviço para o backend em Rust (baseado no framework Loco)
-  backend:
+  backend-loco:
     build:
       context: ./backend-loco/ancient
       dockerfile: Dockerfile
