@@ -1,4 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const token = localStorage.getItem('jwt');
+    if (!token) {
+        window.location.href = 'login.html';
+        return;
+    }
+
     initializeSheet();
     setupEventListeners();
 });
@@ -72,6 +78,15 @@ function setupEventListeners() {
     const pdfButton = document.getElementById('generate-pdf-btn');
     if (pdfButton) {
         pdfButton.addEventListener('click', generatePdf);
+    }
+
+    // Event listener for the Logout button
+    const logoutButton = document.getElementById('logout-btn');
+    if (logoutButton) {
+        logoutButton.addEventListener('click', () => {
+            localStorage.removeItem('jwt');
+            window.location.href = 'login.html';
+        });
     }
 }
 
