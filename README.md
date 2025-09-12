@@ -2,7 +2,7 @@
 
 **Gerenciador de fichas de RPG para o sistema Mago: A Ascensão.**
 
-Este projeto fornece um ambiente de desenvolvimento completo e containerizado para a aplicação Arcane Grimoire, utilizando Docker para gerenciar o backend em Rust, os bancos de dados (PostgreSQL e MongoDB) e o frontend.
+Este projeto fornece um ambiente de desenvolvimento completo e containerizado para a aplicação Arcane Grimoire, utilizando Docker para gerenciar o backend em Rust e o banco de dados PostgreSQL.
 
 ## Pré-requisitos
 
@@ -46,9 +46,8 @@ Após a execução do script, o ambiente estará pronto e rodando!
 
 ### 3. Acesse a Aplicação
 
-- **Backend**: A API estará disponível em `http://localhost:8000`.
+- **Backend**: A API estará disponível em `http://localhost:5150`.
 - **Banco de Dados (PostgreSQL)**: Acessível na porta `5432`.
-- **Banco de Dados (MongoDB)**: Acessível na porta `27017`.
 
 ## Comandos Úteis do Docker
 
