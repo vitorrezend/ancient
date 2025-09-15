@@ -42,9 +42,9 @@ function initializeSheet() {
 
     // Merits & Flaws
     const merits = Array(5).fill('___________');
-    createTraitBlock('merits', merits, 7, 0, { category: 'advantages', group: 'merits' });
+    createTraitBlock('merits', merits, 5, 0, { category: 'advantages', group: 'merits' });
     const flaws = Array(5).fill('___________');
-    createTraitBlock('flaws', flaws, 7, 0, { category: 'advantages', group: 'flaws' });
+    createTraitBlock('flaws', flaws, 5, 0, { category: 'advantages', group: 'flaws' });
 
     // Resonance
     createTraitBlock('resonance', Object.keys(characterData.advantages.resonance), 5, 0, { category: 'advantages', group: 'resonance' });
@@ -213,29 +213,15 @@ function handleDotClick(clickedDot) {
     // Update Data Model
     try {
         if (group) {
-            // For groups like 'backgrounds', the traitName is the key.
-            // If the trait is an input field, its name can change. We need to handle this.
-            const nameElement = traitDiv.querySelector('.trait-input');
-            if (nameElement) {
-                // It's a background or similar editable trait
-                const oldTraitName = nameElement.dataset.currentName;
-                const newTraitName = nameElement.value.trim();
-
-                // If the name has changed, remove the old entry
-                if (oldTraitName && oldTraitName !== newTraitName && characterData[category][group][oldTraitName]) {
-                    delete characterData[category][group][oldTraitName];
-                }
-
-                // Add the new or updated trait, but only if it has a name
-                if (newTraitName) {
-                    characterData[category][group][newTraitName] = newValue;
-                    nameElement.dataset.currentName = newTraitName; // Remember the new name
-                }
-                 console.log(`Updated ${category}.${group}.${newTraitName} to ${newValue}`);
-            } else {
-                 // For fixed traits (attributes, abilities), the key is static
+            // For traits with fixed names (abilities, attributes, resonance)
+            if (traitDiv.querySelector('.trait-label')) {
                 characterData[category][group][traitName] = newValue;
-                 console.log(`Updated ${category}.${group}.${traitName} to ${newValue}`);
+            } else { // For traits with editable names (backgrounds, merits, flaws)
+                const traitNameFromInput = traitDiv.querySelector('.trait-input').value.trim();
+                // Only update if the trait has a name. The creation/renaming is handled by handleTraitInputChange.
+                if (traitNameFromInput && characterData[category][group].hasOwnProperty(traitNameFromInput)) {
+                    characterData[category][group][traitNameFromInput] = newValue;
+                }
             }
         } else {
             // Handle traits that are direct children of a category (Arete, Willpower)
@@ -243,9 +229,8 @@ function handleDotClick(clickedDot) {
             if (dataKey) {
                 characterData[category][dataKey] = newValue;
             }
-             console.log(`Updated ${category}.${traitName} to ${newValue}`);
         }
-        console.log(characterData); // Verify the change
+        console.log('Updated data model:', characterData); // Verify the change
     } catch (e) {
         console.error(`Error updating data model for trait: ${traitName}`, e);
     }
