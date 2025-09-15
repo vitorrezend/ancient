@@ -40,6 +40,18 @@ function initializeSheet() {
     const otherTraits = Array(5).fill('___________');
     createTraitBlock('other-traits', otherTraits, 5, 0, { category: 'advantages', group: 'other-traits' });
 
+    // Merits & Flaws
+    const merits = Array(5).fill('___________');
+    createTraitBlock('merits', merits, 7, 0, { category: 'advantages', group: 'merits' });
+    const flaws = Array(5).fill('___________');
+    createTraitBlock('flaws', flaws, 7, 0, { category: 'advantages', group: 'flaws' });
+
+    // Resonance
+    createTraitBlock('resonance', Object.keys(characterData.advantages.resonance), 5, 0, { category: 'advantages', group: 'resonance' });
+
+    // Experience Log
+    createExperienceLog('experience', characterData.experienceLog);
+
     // Add temporary willpower checkboxes
     createCheckboxGrid('willpower-temporary', 10);
 }
@@ -51,7 +63,7 @@ function setupEventListeners() {
     const sheet = document.querySelector('.character-sheet');
     if (!sheet) return;
 
-    // Existing event listeners for sheet interactions
+    // Event delegation for clicks
     sheet.addEventListener('click', (event) => {
         if (event.target.classList.contains('marker') && event.target.closest('#quintessence')) {
             handleQuintessenceClick(event.target);
@@ -74,6 +86,15 @@ function setupEventListeners() {
         }
     });
 
+    // Event delegation for inputs
+    sheet.addEventListener('input', (event) => {
+        if (event.target.id === 'experience-log-textarea') {
+            characterData.experienceLog = event.target.value;
+        } else if (event.target.classList.contains('trait-input')) {
+            handleTraitInputChange(event.target);
+        }
+    });
+
     // Event listener for the PDF button
     const pdfButton = document.getElementById('generate-pdf-btn');
     if (pdfButton) {
@@ -91,6 +112,22 @@ function setupEventListeners() {
 }
 
 /**
+ * Creates the experience log textarea.
+ * @param {string} targetId The ID of the container element.
+ * @param {string} initialValue The initial value of the textarea.
+ */
+function createExperienceLog(targetId, initialValue) {
+    const container = document.getElementById(targetId);
+    if (!container) return;
+
+    const textarea = document.createElement('textarea');
+    textarea.id = 'experience-log-textarea';
+    textarea.className = 'experience-log';
+    textarea.value = initialValue;
+    container.appendChild(textarea);
+}
+
+/**
  * Handles removing a trait element from the sheet.
  * @param {HTMLElement} buttonElement - The remove button that was clicked.
  */
@@ -98,6 +135,33 @@ function handleRemoveTrait(buttonElement) {
     const traitElement = buttonElement.closest('.trait');
     if (traitElement) {
         traitElement.remove();
+    }
+}
+
+/**
+ * Handles changes to the name of a trait in an input field.
+ * @param {HTMLElement} inputElement - The input element that was changed.
+ */
+function handleTraitInputChange(inputElement) {
+    const traitDiv = inputElement.closest('.trait');
+    if (!traitDiv) return;
+
+    const { category, group } = traitDiv.dataset;
+    const oldTraitName = inputElement.dataset.currentName || '';
+    const newTraitName = inputElement.value.trim();
+
+    // Get the current value from the dots
+    const value = Array.from(traitDiv.querySelectorAll('.marker.filled')).length;
+
+    // If the name has changed, remove the old entry from the data model
+    if (oldTraitName && oldTraitName !== newTraitName && characterData[category][group][oldTraitName]) {
+        delete characterData[category][group][oldTraitName];
+    }
+
+    // Add the new or updated trait to the data model, but only if it has a name
+    if (newTraitName) {
+        characterData[category][group][newTraitName] = value;
+        inputElement.dataset.currentName = newTraitName; // Remember the new name
     }
 }
 
