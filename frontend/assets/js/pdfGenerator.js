@@ -1,72 +1,88 @@
 /**
- * Generates a multi-page PDF from the character sheet, formatted for A4.
+ * Generates a multi-page PDF from the character sheet by rendering section by section
+ * with dynamically applied print styles.
  */
-function generatePdf() {
+async function generatePdf() {
     const { jsPDF } = window.jspdf;
     const characterSheet = document.querySelector('.character-sheet');
+    const body = document.body;
     const charNameInput = document.getElementById('char-name');
     const charName = charNameInput.value.trim() || 'character_sheet';
     const fileName = `${charName.replace(/[^a-z0-9]/gi, '_').toLowerCase()}.pdf`;
 
-    // Options for html2canvas to ensure print styles are applied
-    const canvasOptions = {
-        scale: 3, // Higher scale for better quality
-        useCORS: true,
-        logging: true,
-        backgroundColor: '#ffffff',
-        onclone: (document) => {
-            // This is crucial for applying print-specific styles
-            // It forces the media type to 'print' during rendering
-            const link = document.createElement('link');
-            link.rel = 'stylesheet';
-            link.href = 'assets/css/print.css'; // Adjust path if needed
-            link.media = 'all'; // Temporarily apply to all media for rendering
-            document.head.appendChild(link);
-        }
-    };
+    // Add print-mode class to apply specific styles for PDF generation
+    body.classList.add('print-mode');
 
-    html2canvas(characterSheet, canvasOptions).then(canvas => {
-        try {
-            const imgData = canvas.toDataURL('image/png');
-            const pdf = new jsPDF({
-                orientation: 'portrait',
-                unit: 'pt',
-                format: 'a4'
-            });
+    try {
+        const pdf = new jsPDF({
+            orientation: 'portrait',
+            unit: 'pt',
+            format: 'a4'
+        });
 
-            const pdfWidth = pdf.internal.pageSize.getWidth();
-            const pdfHeight = pdf.internal.pageSize.getHeight();
+        const a4 = { width: pdf.internal.pageSize.getWidth(), height: pdf.internal.pageSize.getHeight() };
 
-            // The canvas is rendered based on the screen's view, but with print styles.
-            // We need to calculate the aspect ratio to fit it onto the PDF page width.
-            const canvasWidth = canvas.width;
-            const canvasHeight = canvas.height;
-            const canvasAspectRatio = canvasWidth / canvasHeight;
+        const canvasOptions = {
+            scale: 2,
+            useCORS: true,
+            backgroundColor: '#ffffff',
+        };
 
-            // Calculate the height of the image when fitted to the PDF width
-            const imgHeight = pdfWidth / canvasAspectRatio;
-            let heightLeft = imgHeight;
-            let position = 0;
+        // Select only the header and sections to be included in the PDF
+        const sections = document.querySelectorAll('.character-sheet > header, .character-sheet > section');
 
-            // Add the first page
-            pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, imgHeight);
-            heightLeft -= pdfHeight;
+        for (let i = 0; i < sections.length; i++) {
+            const section = sections[i];
 
-            // Add new pages if the content is taller than one page
-            while (heightLeft > 0) {
-                position = heightLeft - imgHeight;
+            if (i > 0) {
                 pdf.addPage();
-                pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, imgHeight);
-                heightLeft -= pdfHeight;
             }
 
-            pdf.save(fileName);
-        } catch (error) {
-            console.error('Error generating PDF:', error);
-            alert('An error occurred while generating the PDF. Please check the console for details.');
+            const canvas = await html2canvas(section, canvasOptions);
+            const imgData = canvas.toDataURL('image/png');
+
+            const scaledWidth = a4.width;
+            const scaledHeight = (canvas.height * scaledWidth) / canvas.width;
+
+            if (scaledHeight > a4.height) {
+                // Logic to slice the canvas for sections taller than one page
+                let y = 0;
+                while (y < canvas.height) {
+                    const sliceHeight = Math.min(canvas.height - y, (a4.height * canvas.width) / a4.width);
+
+                    const pageCanvas = document.createElement('canvas');
+                    pageCanvas.width = canvas.width;
+                    pageCanvas.height = sliceHeight;
+                    const pageCtx = pageCanvas.getContext('2d');
+
+                    // Draw the slice from the source canvas onto the page canvas
+                    pageCtx.drawImage(canvas, 0, y, canvas.width, sliceHeight, 0, 0, canvas.width, sliceHeight);
+
+                    const sliceImgData = pageCanvas.toDataURL('image/png');
+
+                    // Add the slice to the PDF
+                    pdf.addImage(sliceImgData, 'PNG', 0, 0, scaledWidth, (sliceHeight * scaledWidth) / canvas.width);
+
+                    y += sliceHeight;
+
+                    // Add a new page if there's more content to draw
+                    if (y < canvas.height) {
+                        pdf.addPage();
+                    }
+                }
+            } else {
+                // If the section fits on one page, add it normally
+                pdf.addImage(imgData, 'PNG', 0, 0, scaledWidth, scaledHeight);
+            }
         }
-    }).catch(error => {
-        console.error('Error with html2canvas:', error);
-        alert('An error occurred while capturing the sheet. Please check the console for details.');
-    });
+
+        pdf.save(fileName);
+
+    } catch (error) {
+        console.error('Error generating PDF:', error);
+        alert('An error occurred while generating the PDF. Please check the console for details.');
+    } finally {
+        // IMPORTANT: Always remove the print-mode class afterwards
+        body.classList.remove('print-mode');
+    }
 }

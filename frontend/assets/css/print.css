@@ -1,82 +1,62 @@
-/* General Print Setup */
-@page {
-    size: A4 portrait;
-    margin: 15mm;
-}
+/* Styles for PDF Generation / Print Mode */
 
-body {
+/* When the .print-mode class is applied, these styles will override others. */
+.print-mode {
     background-color: #ffffff !important;
     color: #000000 !important;
-    font-size: 10pt; /* Adjust font size for print */
+    font-size: 9pt !important;
 }
 
-/* Hide Unnecessary Elements */
-#generate-pdf-btn,
-#logout-btn,
-.add-trait-btn {
-    display: none !important;
-}
-
-/* Sheet Styling */
-.character-sheet {
+.print-mode .character-sheet {
     width: 100% !important;
     max-width: 100% !important;
     margin: 0 !important;
-    padding: 0 !important;
+    padding: 15px !important; /* Add some padding for content */
     border: none !important;
     box-shadow: none !important;
     background-color: #ffffff !important;
 }
 
-/* Typography Reset for Print */
-h1, h2, h3 {
-    color: #000000 !important;
-    border-bottom: 2px solid #000000 !important;
-    text-align: left;
+/* Hide Unnecessary Elements */
+.print-mode #generate-pdf-btn,
+.print-mode #logout-btn,
+.print-mode .add-trait-btn {
+    display: none !important;
 }
 
-h1 { font-size: 22pt; }
-h2 { font-size: 18pt; }
-h3 { font-size: 14pt; border-bottom-width: 1px !important; }
+/* Typography Reset for Print */
+.print-mode h1,
+.print-mode h2,
+.print-mode h3 {
+    color: #000000 !important;
+    border-bottom: 1px solid #000000 !important;
+    text-align: left;
+    padding-bottom: 3px;
+    margin-bottom: 10px;
+}
+
+.print-mode h1 { font-size: 18pt; }
+.print-mode h2 { font-size: 14pt; }
+.print-mode h3 { font-size: 11pt; }
 
 /* Layout Adjustments for Single Column */
-.character-info,
-.attributes,
-.abilities,
-.spheres-grid,
-.advantages-grid {
+.print-mode .character-info,
+.print-mode .attributes,
+.print-mode .abilities,
+.print-mode .spheres-grid,
+.print-mode .advantages-grid {
     grid-template-columns: 1fr !important;
-    gap: 20px !important;
+    gap: 15px !important;
 }
 
-.info-row input {
+.print-mode .info-row input {
     border-color: #000000 !important;
 }
 
-/* Page Break Control */
-.sheet-header {
-    break-after: page; /* The header section gets its own page */
+.print-mode section {
+    padding-top: 10px;
 }
 
-section {
-    break-inside: avoid-page; /* Try to keep sections on a single page */
-    padding-top: 20px;
-}
-
-.attribute-group, .ability-group, .advantage-group {
-    break-inside: avoid; /* Avoid breaking these smaller groups */
-}
-
-/* Specific adjustments for better flow */
-.advantages-grid {
-    align-items: start;
-}
-
-.advantage-column {
-    gap: 20px;
-}
-
-/* Remove the final page break */
-section:last-of-type {
-    break-after: auto;
+.print-mode .advantage-column {
+    gap: 15px;
 }
