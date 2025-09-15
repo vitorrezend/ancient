@@ -70,6 +70,13 @@ const characterData = {
         arete: 1,
         willpower: 1,
         quintessence: Array(20).fill('empty'),
+        merits: {},
+        flaws: {},
+        resonance: {
+            'Dinâmica': 0,
+            'Entrópica': 0,
+            'Estática': 0
+        },
     },
     health: [
         { label: 'Escoriado', penalty: 0, state: 'ok' },
@@ -79,7 +86,8 @@ const characterData = {
         { label: 'Espancado', penalty: -2, state: 'ok' },
         { label: 'Aleijado', penalty: -5, state: 'ok' },
         { label: 'Incapacitado', penalty: null, state: 'ok' }
-    ]
+    ],
+    experienceLog: ''
 };
 
 // This file defines the data model.
