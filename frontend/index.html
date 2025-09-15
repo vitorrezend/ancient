@@ -109,30 +109,32 @@
         <section>
             <h2>Vantagens</h2>
             <div class="advantages-grid">
-                <div class="advantage-group">
-                    <div class="advantage-title-container">
-                        <h3>Antecedentes</h3>
-                        <button class="add-trait-btn" data-target="backgrounds" data-category="advantages" data-group="backgrounds">+</button>
+                <div> <!-- Column 1 Wrapper -->
+                    <div class="advantage-group">
+                        <div class="advantage-title-container">
+                            <h3>Antecedentes</h3>
+                            <button class="add-trait-btn" data-target="backgrounds" data-category="advantages" data-group="backgrounds">+</button>
+                        </div>
+                        <div id="backgrounds"><!-- Gerado por JS --></div>
+                        <div class="advantage-title-container">
+                            <h3 class="other-traits-title">Outras Características</h3>
+                            <button class="add-trait-btn" data-target="other-traits" data-category="advantages" data-group="other-traits">+</button>
+                        </div>
+                        <div id="other-traits"><!-- Gerado por JS --></div>
+                        <div class="advantage-title-container">
+                            <h3>Qualidades</h3>
+                            <button class="add-trait-btn" data-target="merits" data-category="advantages" data-group="merits">+</button>
+                        </div>
+                        <div id="merits"><!-- Gerado por JS --></div>
+                        <div class="advantage-title-container">
+                            <h3>Defeitos</h3>
+                            <button class="add-trait-btn" data-target="flaws" data-category="advantages" data-group="flaws">+</button>
+                        </div>
+                        <div id="flaws"><!-- Gerado por JS --></div>
                     </div>
-                    <div id="backgrounds"><!-- Gerado por JS --></div>
-                    <div class="advantage-title-container">
-                        <h3 class="other-traits-title">Outras Características</h3>
-                        <button class="add-trait-btn" data-target="other-traits" data-category="advantages" data-group="other-traits">+</button>
-                    </div>
-                    <div id="other-traits"><!-- Gerado por JS --></div>
-                    <div class="advantage-title-container">
-                        <h3>Qualidades</h3>
-                        <button class="add-trait-btn" data-target="merits" data-category="advantages" data-group="merits">+</button>
-                    </div>
-                    <div id="merits"><!-- Gerado por JS --></div>
-                    <div class="advantage-title-container">
-                        <h3>Defeitos</h3>
-                        <button class="add-trait-btn" data-target="flaws" data-category="advantages" data-group="flaws">+</button>
-                    </div>
-                    <div id="flaws"><!-- Gerado por JS --></div>
                 </div>
 
-                <div class="advantage-column">
+                <div class="advantage-column"> <!-- Column 2 -->
                     <div class="advantage-group">
                         <h3 class="centered-title">Arete</h3>
                         <div id="arete"><!-- Gerado por JS --></div>
@@ -149,21 +151,20 @@
                     </div>
                 </div>
 
-                <div class="advantage-group">
-                    <h3>Vitalidade</h3>
-                    <div id="health"><!-- Gerado por JS --></div>
+                <div> <!-- Column 3 Wrapper -->
+                    <div class="advantage-group">
+                        <h3>Vitalidade</h3>
+                        <div id="health"><!-- Gerado por JS --></div>
+                    </div>
+                    <div class="advantage-group">
+                        <h3>Ressonância</h3>
+                        <div id="resonance"><!-- Gerado por JS --></div>
+                    </div>
+                    <div class="advantage-group">
+                        <h3>Experiência</h3>
+                        <div id="experience"><!-- Gerado por JS --></div>
+                    </div>
                 </div>
-            </div>
-        </section>
-
-        <section class="bottom-section">
-            <div class="advantage-group">
-                <h3>Ressonância</h3>
-                <div id="resonance"><!-- Gerado por JS --></div>
-            </div>
-            <div class="advantage-group">
-                <h3>Experiência</h3>
-                <div id="experience"><!-- Gerado por JS --></div>
             </div>
         </section>
 
