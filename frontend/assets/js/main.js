@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const token = localStorage.getItem('jwt');
-    if (!token) {
-        window.location.href = 'login.html';
-        return;
-    }
+    // const token = localStorage.getItem('jwt');
+    // if (!token) {
+    //     window.location.href = 'login.html';
+    //     return;
+    // }
 
     initializeSheet();
     setupEventListeners();
