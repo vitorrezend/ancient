@@ -28,8 +28,12 @@ async function generatePdf() {
             backgroundColor: '#ffffff',
         };
 
+        // Make all tab content visible for printing
+        const tabContents = document.querySelectorAll('.tab-content');
+        tabContents.forEach(tc => tc.classList.add('print-visible'));
+
         // Select only the header and sections to be included in the PDF
-        const sections = document.querySelectorAll('.character-sheet > header, .character-sheet > section');
+        const sections = document.querySelectorAll('.character-sheet > header, .character-sheet .tab-content > section');
 
         for (let i = 0; i < sections.length; i++) {
             const section = sections[i];
@@ -84,5 +88,8 @@ async function generatePdf() {
     } finally {
         // IMPORTANT: Always remove the print-mode class afterwards
         body.classList.remove('print-mode');
+        // And remove the temporary visibility class from tab contents
+        const tabContents = document.querySelectorAll('.tab-content');
+        tabContents.forEach(tc => tc.classList.remove('print-visible'));
     }
 }

@@ -46,6 +46,14 @@ function initializeSheet() {
     const flaws = Array(5).fill('___________');
     createTraitBlock('flaws', flaws, 5, 0, { category: 'advantages', group: 'flaws' });
 
+    // New sections
+    const wonders = Array(5).fill('___________');
+    createTraitBlock('wonders', wonders, 5, 0, { category: 'advantages', group: 'wonders' });
+    const focus = Array(5).fill('___________');
+    createTraitBlock('focus', focus, 5, 0, { category: 'advantages', group: 'focus' });
+    const rotes = Array(10).fill('___________');
+    createTraitBlock('rotes', rotes, 10, 0, { category: 'advantages', group: 'rotes' });
+
     // Resonance
     createTraitBlock('resonance', Object.keys(characterData.advantages.resonance), 5, 0, { category: 'advantages', group: 'resonance' });
 
@@ -60,6 +68,24 @@ function initializeSheet() {
  * Sets up event listeners for the interactive parts of the sheet.
  */
 function setupEventListeners() {
+    // Tab switching logic
+    const tabs = document.querySelector('.tabs');
+    if (tabs) {
+        tabs.addEventListener('click', (event) => {
+            if (event.target.classList.contains('tab-link')) {
+                const tabId = event.target.dataset.tab;
+
+                // Remove active class from all tab links and contents
+                document.querySelectorAll('.tab-link').forEach(link => link.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+
+                // Add active class to the clicked tab and corresponding content
+                event.target.classList.add('active');
+                document.getElementById(tabId).classList.add('active');
+            }
+        });
+    }
+
     const sheet = document.querySelector('.character-sheet');
     if (!sheet) return;
 
