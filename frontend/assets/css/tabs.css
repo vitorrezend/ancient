@@ -64,3 +64,54 @@
 .other-traits-grid .trait {
     margin-bottom: 0;
 }
+
+.combat-section {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+    align-items: start;
+}
+
+.combat-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.combat-table th,
+.combat-table td {
+    border: 1px solid #3a2d21;
+    padding: 8px;
+    text-align: center;
+}
+
+.combat-table th {
+    background-color: #e0d8c4;
+}
+
+.combat-table td {
+    height: 25px;
+}
+
+.armor-section h3 {
+    text-align: center;
+    font-family: 'Trajan Pro', 'Georgia', serif;
+    text-transform: uppercase;
+    color: #5a442a;
+    margin-bottom: 10px;
+}
+
+.armor-field {
+    margin-bottom: 10px;
+}
+
+.armor-field label {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.underlined-span {
+    border-bottom: 1px solid #3a2d21;
+    display: inline-block;
+    width: 70%;
+    height: 1.2em; /* To give it some height */
+}
