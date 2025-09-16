@@ -62,6 +62,28 @@ function initializeSheet() {
 
     // Add temporary willpower checkboxes
     createCheckboxGrid('willpower-temporary', 10);
+
+    initializeAntecedentesTab();
+}
+
+/**
+ * Populates the 'Antecedentes' tab with freeform text areas and lists.
+ */
+function initializeAntecedentesTab() {
+    // Expanded Background
+    createTwoColumnTextList('expanded-background', 12);
+
+    // Possessions
+    createTitledTextList('gear-carried-container', 'Equipamento (Carregado)', 8);
+    createTitledTextList('equipment-owned-container', 'Equipamento (Possuído)', 8);
+
+    // Familiar & Grimoire
+    createTitledTextarea('familiar-container', 'Familiar');
+    createTitledTextarea('grimoire-container', 'Grimório');
+
+    // Chantry
+    createTitledTextarea('chantry-location', 'Localização');
+    createTitledTextarea('chantry-description', 'Descrição');
 }
 
 /**
