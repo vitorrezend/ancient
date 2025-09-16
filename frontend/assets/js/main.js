@@ -101,6 +101,12 @@ function setupEventListeners() {
         pdfButton.addEventListener('click', generatePdf);
     }
 
+    // Event listener for the Save JSON button
+    const jsonButton = document.getElementById('save-json-btn');
+    if (jsonButton) {
+        jsonButton.addEventListener('click', saveJSON);
+    }
+
     // Event listener for the Logout button
     const logoutButton = document.getElementById('logout-btn');
     if (logoutButton) {
