@@ -37,7 +37,7 @@ function initializeSheet() {
     createHealthTrack('health', characterData.health);
 
     // Other Traits
-    const otherTraits = Array(5).fill('___________');
+    const otherTraits = Array(9).fill('___________');
     createTraitBlock('other-traits', otherTraits, 5, 0, { category: 'advantages', group: 'other-traits' });
 
     // Merits & Flaws
