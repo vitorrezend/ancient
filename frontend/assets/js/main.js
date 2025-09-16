@@ -376,7 +376,7 @@ function initializeHistoriaTab() {
     // Visuals
     createTitledSection('visuals-section', 'Visuais');
     createTitledTextarea('cabal-chart-container', 'Círculo');
-    createTitledTextarea('character-sketch-container', 'Esboço do Personagem');
+    createImageUploadBlock('character-sketch-container', 'Esboço do Personagem');
 }
 
 

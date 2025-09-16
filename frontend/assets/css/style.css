@@ -217,3 +217,36 @@ section {
     display: flex;
     flex-direction: column;
 }
+
+/* --- Image Upload Component --- */
+.upload-button {
+    display: inline-block;
+    padding: 8px 12px;
+    cursor: pointer;
+    background-color: #5a442a;
+    color: #f5eeda;
+    border: 1px solid #c8a46e;
+    border-radius: 4px;
+    font-family: 'Trajan Pro', 'Georgia', serif;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.upload-button:hover {
+    background-color: #7a644a;
+}
+
+.upload-status {
+    font-size: 0.9em;
+    color: #5a442a;
+    margin-bottom: 10px;
+    font-style: italic;
+}
+
+.image-preview {
+    max-width: 100%;
+    height: auto;
+    border: 2px solid #c8a46e;
+    margin-top: 10px;
+    display: block;
+}
