@@ -58,5 +58,9 @@
 .other-traits-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 8px 20px;
+    gap: 4px 20px;
+}
+
+.other-traits-grid .trait {
+    margin-bottom: 0;
 }
