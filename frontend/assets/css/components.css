@@ -90,6 +90,13 @@
     color: #3a2d21;
 }
 
+.editable-list-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
 /* New Freeform Component Styles */
 
 .freeform-column {
