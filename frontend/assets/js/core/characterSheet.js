@@ -72,6 +72,10 @@ const characterData = {
         quintessence: Array(20).fill('empty'),
         merits: {},
         flaws: {},
+        "other-traits": {},
+        wonders: {},
+        focus: {},
+        rotes: {},
         resonance: {
             'Dinâmica': 0,
             'Entrópica': 0,
