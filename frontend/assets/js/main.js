@@ -121,8 +121,12 @@ function setupEventListeners() {
             handleDotClick(event.target);
         } else if (event.target.classList.contains('health-box')) {
             handleHealthBoxClick(event.target);
+        } else if (event.target.classList.contains('remove-btn') && event.target.closest('.editable-list-item')) {
+            handleRemoveListItem(event.target);
         } else if (event.target.classList.contains('remove-btn')) {
             handleRemoveTrait(event.target);
+        } else if (event.target.classList.contains('add-trait-btn') && event.target.dataset.action === 'add-list-item') {
+            handleAddListItem(event.target);
         } else if (event.target.classList.contains('add-trait-btn')) {
             const button = event.target;
             const targetId = button.dataset.target;
@@ -189,6 +193,30 @@ function handleRemoveTrait(buttonElement) {
     const traitElement = buttonElement.closest('.trait');
     if (traitElement) {
         traitElement.remove();
+    }
+}
+
+/**
+ * Handles adding a new item to a freeform list.
+ * @param {HTMLElement} addButton - The add button that was clicked.
+ */
+function handleAddListItem(addButton) {
+    const targetId = addButton.dataset.target;
+    const listContainer = document.getElementById(targetId);
+    if (listContainer) {
+        const newItem = createEditableListItem();
+        listContainer.appendChild(newItem);
+    }
+}
+
+/**
+ * Handles removing an item from a freeform list.
+ * @param {HTMLElement} removeButton - The remove button that was clicked.
+ */
+function handleRemoveListItem(removeButton) {
+    const listItem = removeButton.closest('.editable-list-item');
+    if (listItem) {
+        listItem.remove();
     }
 }
 
