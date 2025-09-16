@@ -48,11 +48,11 @@ function initializeSheet() {
 
     // New sections
     const wonders = Array(5).fill('___________');
-    createTraitBlock('wonders', wonders, 5, 0, { category: 'advantages', group: 'wonders' });
+    createTraitBlock('wonders', wonders, 0, 0, { category: 'advantages', group: 'wonders' });
     const focus = Array(5).fill('___________');
-    createTraitBlock('focus', focus, 5, 0, { category: 'advantages', group: 'focus' });
+    createTraitBlock('focus', focus, 0, 0, { category: 'advantages', group: 'focus' });
     const rotes = Array(10).fill('___________');
-    createTraitBlock('rotes', rotes, 10, 0, { category: 'advantages', group: 'rotes' });
+    createTraitBlock('rotes', rotes, 0, 0, { category: 'advantages', group: 'rotes' });
 
     // Resonance
     createTraitBlock('resonance', Object.keys(characterData.advantages.resonance), 5, 0, { category: 'advantages', group: 'resonance' });
