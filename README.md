@@ -68,5 +68,37 @@ Aqui estão alguns comandos úteis para gerenciar os seus containers:
   docker compose ps
   ```
 
+## Acessando o Banco de Dados
+
+Você pode se conectar diretamente ao banco de dados PostgreSQL que está rodando no container para fazer consultas ou verificar os dados.
+
+As credenciais de acesso e o nome do banco são os que estão definidos no seu arquivo `.env`. Com base no `.env.example`, os valores padrão são:
+- **Host**: `localhost`
+- **Porta**: `5432`
+- **Usuário**: `user`
+- **Senha**: `changeme`
+- **Banco de Dados**: `rpg_database`
+
+Você pode usar uma ferramenta de sua preferência, como DBeaver, DataGrip, ou o próprio `psql` via Docker:
+
+```bash
+# Conecte-se ao container do Postgres
+docker compose exec db psql -U user -d rpg_database
+```
+
+## Troubleshooting
+
+Encontrou algum problema? Aqui estão algumas soluções para erros comuns:
+
+- **Erro "port is already allocated" ou "address already in use"**:
+  - **Causa**: Uma das portas que o Docker está tentando usar (`5150` para o backend ou `5432` para o banco) já está ocupada por outro processo em sua máquina.
+  - **Solução**:
+    1. Pare o processo que está usando a porta.
+    2. Ou altere a porta no arquivo `docker-compose.yaml`. Por exemplo, mude `"5432:5432"` para `"5433:5432"` para expor o banco de dados na porta 5433 da sua máquina.
+
+- **O script `setup.sh` falha com "permission denied"**:
+  - **Causa**: O script não tem permissão de execução.
+  - **Solução**: Rode `chmod +x setup.sh` antes de `./setup.sh`.
+
 ---
 *Este projeto foi configurado para ser simples e rápido de iniciar. Se encontrar algum problema, verifique se o Docker está rodando corretamente.*
