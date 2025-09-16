@@ -143,3 +143,77 @@ section {
     outline: none;
     border-color: #5a442a;
 }
+
+/* --- History Tab --- */
+.history-section {
+    margin-bottom: 20px;
+}
+
+.history-section .section-title {
+    margin-bottom: 15px;
+}
+
+.seekings-quiets-grid,
+.description-grid,
+.visuals-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    align-items: start;
+}
+
+#history-awakening-container,
+#goals-destiny-container {
+    margin-bottom: 20px;
+}
+
+#history-awakening-container .freeform-textarea,
+#goals-destiny-container .freeform-textarea {
+    height: 150px; /* Larger text area */
+}
+
+#seekings-container .freeform-textarea,
+#quiets-container .freeform-textarea {
+    height: 100px;
+}
+
+#appearance-avatar-container .freeform-textarea {
+    height: 250px;
+}
+
+#cabal-chart-container .freeform-textarea,
+#character-sketch-container .freeform-textarea {
+    height: 180px;
+}
+
+.description-field {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 8px;
+}
+
+.description-field label {
+    font-weight: bold;
+    margin-right: 8px;
+    white-space: nowrap;
+}
+
+.description-input {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #3a2d21;
+    background-color: transparent;
+    font-family: 'Georgia', serif;
+    font-size: 1em;
+    padding: 2px;
+}
+
+.description-input:focus {
+    outline: none;
+    border-bottom: 1px solid #c8a46e;
+}
+
+#description-fields-container {
+    display: flex;
+    flex-direction: column;
+}
