@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # Script para configurar e iniciar o ambiente de desenvolvimento.
 #
