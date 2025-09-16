@@ -64,6 +64,7 @@ function initializeSheet() {
     createCheckboxGrid('willpower-temporary', 10);
 
     initializeAntecedentesTab();
+    initializeHistoriaTab();
 }
 
 /**
@@ -353,6 +354,81 @@ function createHealthTrack(targetId, healthLevels) {
     });
 
     targetElement.appendChild(fragment);
+}
+
+/**
+ * Populates the 'História' tab with its specific components.
+ */
+function initializeHistoriaTab() {
+    // History & Goals
+    createTitledTextarea('history-awakening-container', 'História / Despertar');
+    createTitledTextarea('goals-destiny-container', 'Objetivos / Destino');
+
+    // Seekings & Quiets
+    createTitledTextarea('seekings-container', 'Buscas');
+    createTitledTextarea('quiets-container', 'Calma');
+
+    // Description
+    createTitledSection('description-section', 'Descrição');
+    createDescriptionBlock('description-fields-container');
+    createTitledTextarea('appearance-avatar-container', 'Aparência / Natureza do Avatar');
+
+    // Visuals
+    createTitledSection('visuals-section', 'Visuais');
+    createTitledTextarea('cabal-chart-container', 'Círculo');
+    createTitledTextarea('character-sketch-container', 'Esboço do Personagem');
+}
+
+
+/**
+ * Creates the description block with labels and input fields.
+ * @param {string} targetId The ID of the container element.
+ */
+function createDescriptionBlock(targetId) {
+    const container = document.getElementById(targetId);
+    if (!container) return;
+
+    const fields = [
+        "Idade:", "Idade Aparente:", "Data de Nascimento:", "Idade do Despertar:",
+        "Cabelo:", "Olhos:", "Etnia:", "Nacionalidade:", "Altura:", "Peso:", "Sexo:"
+    ];
+
+    const fragment = document.createDocumentFragment();
+
+    fields.forEach(label => {
+        const fieldDiv = document.createElement('div');
+        fieldDiv.className = 'description-field';
+
+        const labelElement = document.createElement('label');
+        labelElement.textContent = label;
+
+        const inputElement = document.createElement('input');
+        inputElement.type = 'text';
+        inputElement.className = 'description-input';
+
+        fieldDiv.appendChild(labelElement);
+        fieldDiv.appendChild(inputElement);
+        fragment.appendChild(fieldDiv);
+    });
+
+    container.appendChild(fragment);
+}
+
+/**
+ * Creates and prepends a titled section header.
+ * @param {string} containerId The ID of the container element.
+ * @param {string} title The title text.
+ */
+function createTitledSection(containerId, title) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    const titleElement = document.createElement('h2');
+    titleElement.className = 'section-title';
+    titleElement.textContent = title;
+
+    // Prepend the title to the container
+    container.insertBefore(titleElement, container.firstChild);
 }
 
 /**
