@@ -33,6 +33,28 @@ Esta é a maneira recomendada e mais simples de configurar o ambiente de desenvo
     ```
     Você deve ver dois contêineres em execução: `rpg-postgres` e `rpg-backend-loco`.
 
+## Desenvolvimento do Frontend
+
+O backend em Rust serve uma aplicação de frontend moderna escrita em React. Antes de iniciar o backend localmente, você **precisa** compilar o frontend para que os arquivos estáticos (HTML, JS, CSS) sejam gerados.
+
+**Pré-requisitos:**
+- **Node.js e npm:** [Instruções de instalação](https://nodejs.org/en/download/)
+
+**Passos para o Frontend:**
+1.  **Navegue até o diretório do frontend:**
+    ```bash
+    cd backend-loco/ancient/frontend
+    ```
+2.  **Instale as dependências do Node.js:**
+    ```bash
+    npm install
+    ```
+3.  **Compile o frontend:**
+    ```bash
+    npm run build
+    ```
+    Este comando irá criar um diretório `dist` dentro de `backend-loco/ancient/frontend`. O backend do Loco está configurado para encontrar e servir os arquivos desta pasta. Após executar este passo, você pode prosseguir com o desenvolvimento do backend.
+
 ## Desenvolvimento Local (Fora do Docker)
 
 Se você precisar trabalhar diretamente no backend sem usar o contêiner do Docker, siga estes passos.
