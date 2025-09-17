@@ -1,7 +1,7 @@
 services:
   # Serviço para o banco de dados PostgreSQL
   db:
-    image: postgres:latest
+    image: postgres:16
     container_name: rpg-postgres
     #restart: always
     environment:
