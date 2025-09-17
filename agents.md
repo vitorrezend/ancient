@@ -41,7 +41,8 @@ Se você precisar trabalhar diretamente no backend sem usar o contêiner do Dock
 - **Rust:** [Instruções de instalação](https://www.rust-lang.org/tools/install)
 - **Loco CLI:**
   ```bash
-  cargo install loco-cli
+  cargo install loco
+  cargo install sea-orm-cli
   ```
 - **PostgreSQL** rodando (pode ser o do Docker Compose).
 
